@@ -5,6 +5,7 @@
      <p class='lead'>
      {{ $question->description }}
      </p>
+     <p>Submitted by {{ $question->user->name }}, {{ $question->created_at->diffForHumans() }}</p>
 
      <hr />
 
@@ -15,6 +16,7 @@
          <div class="panel panel-default">
               <div class="panel-body">
                     <p>{{ $answer->content }}</p>
+                    <p>Answered by {{ $answer->user->name }} , {{ $answer->created_at->diffForHumans() }}</p>
               </div>
          </div>
      

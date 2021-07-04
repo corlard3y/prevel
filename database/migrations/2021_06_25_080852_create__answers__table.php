@@ -13,6 +13,7 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('answers', function (Blueprint $table) {
             $table->bigIncrements('id');
             //foreign key column
@@ -23,6 +24,7 @@ class CreateAnswersTable extends Migration
 
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -32,9 +34,11 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {   
+        Schema::disableForeignKeyConstraints();
         Schema::table('answers', function (Blueprint $table) {
             $table->dropForeign('answers_question_id_foreign');
         });
+        Schema::enableForeignKeyConstraints();
         
         Schema::dropIfExists('answers');
     }

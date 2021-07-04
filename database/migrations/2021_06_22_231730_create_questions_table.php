@@ -13,12 +13,14 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description')->nullable();
             $table->timestamps();
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -28,6 +30,8 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('questions');
+        Schema::enableForeignKeyConstraints();
     }
 }
